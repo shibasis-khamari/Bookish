@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookish | Your Reading List</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="topbar" aria-label="Main navigation">
+            <a class="brand" href="#discover" aria-label="Bookish home"><span class="brand-mark">b.</span> bookish</a>
+            <div class="nav-actions">
+                <button type="button" class="nav-link is-active" data-view="discover">Discover</button>
+                <button type="button" class="nav-link saved-nav" data-view="saved">My shelf <span id="saved-count" class="saved-count">0</span></button>
+            </div>
+            <div class="profile-mark" aria-label="Your reading profile">R</div>
+        </nav>
+
+        <header id="discover">
+            <div class="eyebrow"><span class="eyebrow-dot"></span> A little more well-read</div>
+            <h1>Stories for your<br><span>next chapter.</span></h1>
+            <p>Find books worth keeping. Your shelf and recommendations get better with every save.</p>
+        </header>
+
+        <main>
+            <form id="search-form" class="controls">
+                <label class="search-label" for="search-input">Search the catalog</label>
+                <div class="search-row">
+                    <span class="search-icon" aria-hidden="true">⌕</span>
+                    <input type="search" id="search-input" class="search-box" placeholder="Title, author, or subject" value="">
+                    <button type="submit" id="load-books-btn" class="btn"><span aria-hidden="true">→</span> Search</button>
+                </div>
+            </form>
+            <div class="browse-row">
+                <span class="browse-label">Browse by genre</span>
+                <select id="genre-select" aria-label="Filter books by genre">
+                    <option value="">All genres</option>
+                    <option value="fiction">Fiction</option>
+                    <option value="mystery">Mystery</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="romance">Romance</option>
+                    <option value="science fiction">Science fiction</option>
+                    <option value="biography">Biography</option>
+                    <option value="history">History</option>
+                    <option value="business">Business</option>
+                    <option value="self-help">Personal growth</option>
+                </select>
+            </div>
+
+            <div id="status-message" class="status" style="display: none;"></div>
+            <div id="error-message" class="error-box" style="display: none;"></div>
+
+            <section id="search-section" class="search-section" hidden>
+                <div class="section-heading">
+                    <div><p class="section-kicker">The catalog</p><h2 id="results-title">Search results</h2></div>
+                    <span id="results-count" class="results-count"></span>
+                </div>
+                <div id="book-list" class="book-grid"></div>
+            </section>
+
+            <div id="discover-view">
+                <section class="shelf-section">
+                    <div class="section-heading">
+                        <div><p class="section-kicker">Picked for your taste</p><h2>For your next read</h2></div>
+                        <span id="recommendation-note" class="shelf-note">Save a book to tune your picks</span>
+                    </div>
+                    <div id="recommendation-list" class="shelf-grid"><div class="shelf-loading">Finding your next favorite...</div></div>
+                </section>
+
+                <section class="shelf-section popular-section">
+                    <div class="section-heading">
+                        <div><p class="section-kicker">A good place to start</p><h2>Popular picks</h2></div>
+                        <span class="shelf-note">Google Books discovery results</span>
+                    </div>
+                    <div id="popular-list" class="shelf-grid"><div class="shelf-loading">Gathering reader favorites...</div></div>
+                    <p class="data-note">Popularity is estimated from Google Books search relevance; verified live sales rankings are not available in this catalog.</p>
+                </section>
+
+                <section class="shelf-section top-selling-section">
+                    <div class="section-heading">
+                        <div><p class="section-kicker">Bestseller shelf</p><h2>Top-selling books</h2></div>
+                        <span class="shelf-note">Bestseller catalog matches</span>
+                    </div>
+                    <div id="top-selling-list" class="shelf-grid"><div class="shelf-loading">Checking bestseller titles...</div></div>
+                    <p class="data-note">Based on Google Books bestseller search matches, not a verified or ranked live sales chart.</p>
+                </section>
+            </div>
+
+            <section id="saved-view" class="saved-view" hidden>
+                <div class="section-heading">
+                    <div><p class="section-kicker">Collected for later</p><h2>Your reading shelf</h2></div>
+                    <span class="shelf-note">Saved on this device</span>
+                </div>
+                <div id="saved-list" class="book-grid"></div>
+            </section>
+        </main>
+    </div>
+
+    <div id="book-detail-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <button type="button" class="modal-close" id="modal-close-btn" aria-label="Close modal">&times;</button>
+            <div id="modal-status" class="status" style="display: none;"></div>
+            <div id="modal-error" class="error-box" style="display: none;"></div>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
